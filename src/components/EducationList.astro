@@ -1,0 +1,48 @@
+---
+const education = [
+  {
+    school: "University of Example",
+    degree: "MSc Data Science",
+    dates: "2019 - 2021",
+    details: "Focus on machine learning, NLP, and cloud computing. etcetera-----------------------------------------------------------------------------------------",
+  },
+  {
+    school: "Example College",
+    degree: "BSc Computer Science",
+    dates: "2015 - 2019",
+    details: "Specialised in database management and software development.",
+  }
+];
+---
+
+<section class="education-section">
+  <header class="section-header">
+    <h3>Delete this part?</h3>
+  </header>
+  <ul class="education-list">
+    {education.map((entry) => (
+      <li class="education-item">
+        <h4>{entry.school}</h4>
+        <p><strong>{entry.degree}</strong> ({entry.dates})</p>
+        <p>{entry.details}</p>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  .education-section {
+    padding: 2rem;
+  }
+
+  .education-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .education-item {
+    border-left: 4px solid var(--accent-regular);
+    padding-left: 1rem;
+  }
+</style>

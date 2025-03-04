@@ -1,0 +1,70 @@
+---
+const experience = [
+  {
+    title: "Data Analyst",
+    employer: "Tech Corp",
+    dates: "2021 - Present",
+    location: "Berlin, Germany",
+    description: "Worked on data analysis and visualization projects using SQL and Python.",
+  },
+  {
+    title: "Business Intelligence Intern",
+    employer: "Analytics Inc.",
+    dates: "2019 - 2021",
+    location: "London, UK",
+    description: "Developed dashboards in Tableau and wrote queries for business reports.",
+  }
+];
+---
+
+<section class="experience-section">
+  <header class="section-header">
+    <h3>Delete this part?</h3>
+  </header>
+  <ul class="experience-list">
+    {experience.map((job) => (
+      <li class="experience-item">
+        <div class="experience-header">
+          <h4>{job.title} at {job.employer}</h4>
+          <p class="experience-meta"><strong>{job.dates} - {job.location}</strong></p>
+        </div>
+        <p class="experience-description">{job.description}</p> <!-- Ensures full-width span -->
+      </li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  .experience-section {
+    padding: 2rem;
+    max-width: 100%; /* Adjusts to wider text layout */
+    margin: 0 auto;
+  }
+
+  .experience-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .experience-item {
+    border-left: 4px solid var(--accent-regular);
+    padding-left: 1rem;
+  }
+
+  .experience-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .experience-meta {
+    font-weight: bold;
+    color: var(--gray-500);
+  }
+
+  .experience-description {
+    max-width: 100%;
+    text-align: justify; /* Ensures full-width display */
+  }
+</style>

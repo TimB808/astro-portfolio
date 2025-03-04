@@ -15,6 +15,9 @@ import PortfolioPreview from '../components/PortfolioPreview.astro';
 // Page section components
 import ContactCTA from '../components/ContactCTA.astro';
 import Skills from '../components/Skills.astro';
+import EducationList from '../components/EducationList.astro';
+import ExperienceList from '../components/ExperienceList.astro';
+
 
 // Content Fetching: List four most recent work projects
 const projects = (await getCollection('work'))
@@ -52,59 +55,79 @@ const projects = (await getCollection('work'))
 			<Skills />
 		</div>
 
-		<main class="wrapper stack gap-20 lg:gap-48">
-			<section class="section with-background with-cta">
-				<header class="section-header stack gap-2 lg:gap-4">
-					<h3>Selected Work</h3>
-					<p>Take a look below at some of my featured work for clients from the past few years.</p>
-				</header>
+    <main class="stack gap-20 lg:gap-48 with-background">
+      <!-- Projects Section -->
+      <section class="section with-background with-cta">
+        <header class="section-header stack gap-2 lg:gap-4">
+          <h3>Selected Work</h3>
+          <p>Take a look below at some of my featured work for clients from the past few years.</p>
+        </header>
 
-				<div class="gallery">
-					<Grid variant="offset">
-						{
-							projects.map((project) => (
-								<li>
-									<PortfolioPreview project={project} />
-								</li>
-							))
-						}
-					</Grid>
-				</div>
+        <div class="gallery">
+          <Grid variant="offset">
+            {
+              projects.map((project) => (
+                <li>
+                  <PortfolioPreview project={project} />
+                </li>
+              ))
+            }
+          </Grid>
+        </div>
 
-				<div class="cta">
-					<CallToAction href="/work/">
-						View All
-						<Icon icon="arrow-right" size="1.2em" />
-					</CallToAction>
-				</div>
-			</section>
+        <div class="cta">
+          <CallToAction href="/work/">
+            View All
+            <Icon icon="arrow-right" size="1.2em" />
+          </CallToAction>
+        </div>
+      </section>
 
-			<section class="section with-background bg-variant">
-				<header class="section-header stack gap-2 lg:gap-4">
-					<h3>Mentions</h3>
-					<p>
-						I have been fortunate enough to receive praise for my work in several publications. Take
-						a look below to learn more.
-					</p>
-				</header>
+      <!-- Mentions Section -->
+      <section class="section with-background bg-variant">
+        <header class="section-header stack gap-2 lg:gap-4">
+          <h3>Mentions</h3>
+          <p>
+            I have been fortunate enough to receive praise for my work in several publications. Take
+            a look below to learn more.
+          </p>
+        </header>
 
-				<div class="gallery">
-					<Grid variant="small">
-						{
-							['Medium', 'BuzzFeed', 'The Next Web', 'awwwards.', 'TechCrunch'].map((brand) => (
-								<li class="mention-card">
-									<p>{brand}</p>
-								</li>
-							))
-						}
-					</Grid>
-				</div>
-			</section>
-		</main>
+        <div class="gallery">
+          <Grid variant="small">
+            {
+              ['Medium', 'BuzzFeed', 'The Next Web', 'awwwards.', 'TechCrunch'].map((brand) => (
+                <li class="mention-card">
+                  <p>{brand}</p>
+                </li>
+              ))
+            }
+          </Grid>
+        </div>
+      </section>
 
-		<ContactCTA />
-	</div>
+      <!-- Education Section -->
+      <section class="education-section full-width-section with-background with-cta">
+        <header class="section-header stack gap-2 lg:gap-4">
+          <h3>Education</h3>
+        </header>
+        <EducationList />
+      </section>
+
+      <!-- Work Experience Section -->
+      <section class="experience-section full-width-section with-background bg-variant">
+        <header class="section-header stack gap-2 lg:gap-4">
+          <h3>Work Experience</h3>
+        </header>
+        <ExperienceList />
+      </section>
+
+      <ContactCTA />
+    </main>
+  </div>
 </BaseLayout>
+
+
 
 <style>
 	.hero {
@@ -149,14 +172,52 @@ const projects = (await getCollection('work'))
 
 	/* ====================================================== */
 
-	.section {
+	<style>
+  .education-section,
+  .experience-section {
+    max-width: 100%;
+    width: 100vw;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .education-section .section-header,
+  .experience-section .section-header {
+    max-width: 100%;
+    text-align: left;
+    width: 100%;
+  }
+
+  .full-width-section {
+    max-width: 100%;
+    width: 100vw;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .full-width-section .section-header {
+    max-width: 100%;
+    text-align: left;
+    width: 100%;
+  }
+
+
+  .section {
 		display: grid;
 		gap: 2rem;
+    width: 100%; /* Ensure the section itself spans full width */
+    padding-left: 1rem; /* Add padding to prevent content from touching edges */
+    padding-right: 1rem;
+	}
+
+	main.with-background {
+		position: relative;
 	}
 
 	.with-background {
 		position: relative;
 	}
+
 
 	.with-background::before {
 		--hero-bg: var(--bg-image-subtle-2);
@@ -166,6 +227,7 @@ const projects = (await getCollection('work'))
 		pointer-events: none;
 		left: 50%;
 		width: 100vw;
+    height: 100%;
 		aspect-ratio: calc(2.25 / var(--bg-scale));
 		top: 0;
 		transform: translateY(-75%) translateX(-50%);
@@ -199,6 +261,8 @@ const projects = (await getCollection('work'))
 			grid-template-columns: repeat(4, 1fr);
 			grid-template-areas: 'header header header header' 'gallery gallery gallery gallery';
 			gap: 5rem;
+      padding-left: 2.5rem; /* Adjust padding for larger screens */
+      padding-right: 2.5rem;
 		}
 
 		.section.with-cta {
