@@ -1,25 +1,66 @@
 ---
 const experience = [
   {
-    title: "Data Analyst",
-    employer: "Tech Corp",
-    dates: "2021 - Present",
-    location: "Berlin, Germany",
-    description: "Worked on data analysis and visualization projects using SQL and Python.",
+    title: "Policy Manager - Violence Against Women and Girls (VAWG)",
+    employer: "Scottish Government",
+    dates: "08/2021 – 01/2023",
+    location: "Edinburgh, UK",
+    description: [
+      " Maintained strong relationships with stakeholders despite frequent differences over policy positions",
+      " Led the team's responses to stakeholders and MPs on sensitive topics, writing ministerial briefings and speeches and reviewing junior colleagues' work",
+      " Organised communications campaign as part of the 16 days of Activism against GBV, including ministerial visits and a Twitter campaign, coordinating colleagues across different departments",
+      " Line management of Policy Officer",
+    ],
   },
-  {
-    title: "Business Intelligence Intern",
-    employer: "Analytics Inc.",
-    dates: "2019 - 2021",
+    {
+    title: "Senior Consultant - Agriculture and Economic Development",
+    employer: "LTS International",
+    dates: "07/2020 - 08/2021",
+    location: "Edinburgh, UK",
+    description: [
+      " Led client relationships for £1m forestry governance project",
+            " Grant management of £11m agricultural development project",
+            " Management of sub-contractors",
+    ],
+  },
+      {
+    title: "Programme Officer",
+    employer: "Mercy Corps",
+    dates: "01/2019 - 07/2020",
+    location: "Edinburgh, UK",
+    description: [
+      " Client relationship management for projects in West and North Africa, leading dialogue to resolve sensitive or complex issues such as negotiations on grant agreement terms",
+            " Used understanding of client needs and teamwork skills to coordinate the work of colleagues across multiple countries to develop strong project proposals, working to tight deadlines",
+    ],
+  },
+           {
+    title: "Programme Support Manager",
+    employer: "Anti-Slavery International",
+    dates: "11/2017 - 01/2019",
     location: "London, UK",
-    description: "Developed dashboards in Tableau and wrote queries for business reports.",
-  }
+    description: [
+      " Developed project management systems and donor compliance across Anti-Slavery's project portfolio, driving improvement of financial reporting processes",
+            " Built downstream partner organisations' financial management capacity and developed their financial reporting systems",
+      " Led design of budgets for proposals, directing inputs from partner organisations and revising budgets to optimise value for money",
+                  " Contributed to corporate budget and management accounts",
+    ],
+  },
+               {
+    title: "Manager",
+    employer: "Adam Smith International",
+    dates: "04/2015 - 09/2017",
+    location: "London, UK",
+    description: [
+      " Delivered savings of over £30k as project manager on development project in Nepal",
+            " Consultant recruitment and written contributions to a succession of winning bids, including for a £20m UK government contract",
+    ],
+  },
 ];
 ---
 
 <section class="experience-section">
   <header class="section-header">
-    <h3>Delete this part?</h3>
+    <h3> </h3>
   </header>
   <ul class="experience-list">
     {experience.map((job) => (
@@ -28,7 +69,13 @@ const experience = [
           <h4>{job.title} at {job.employer}</h4>
           <p class="experience-meta"><strong>{job.dates} - {job.location}</strong></p>
         </div>
-        <p class="experience-description">{job.description}</p> <!-- Ensures full-width span -->
+        <div class="experience-description">
+          <ul> {/* Add the <ul> element here */}
+            {job.description.map((line) => (
+              <li>{line}</li> // Render each line as a list item
+            ))}
+          </ul>
+        </div>
       </li>
     ))}
   </ul>
@@ -36,35 +83,62 @@ const experience = [
 
 <style>
   .experience-section {
-    padding: 2rem;
-    max-width: 100%; /* Adjusts to wider text layout */
-    margin: 0 auto;
+    max-width: 83rem; /* Adjust this value based on the width of the hero section */
+    width: 100%;
+    margin: 0 auto; /* Centers the section */
+    padding-left: 0;
+    padding-right: 5rem;
   }
 
   .experience-list {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    list-style: none; /* Remove default bullet points */
   }
 
   .experience-item {
-    border-left: 4px solid var(--accent-regular);
-    padding-left: 1rem;
+    /* border-left: 4px solid var(--accent-regular); COMMENTED OUT TO REMOVE PURPLE LINE */
+    padding-left: 0;
+  }
+
+  /* Added 4/3/25 to adjust font size */
+  .experience-item h4 {
+    font-size: var(--text-lg);
+    margin-bottom: 0.5rem;
   }
 
   .experience-header {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+
   }
 
   .experience-meta {
+    font-size: var(--text-lg);
     font-weight: bold;
     color: var(--gray-500);
   }
 
   .experience-description {
     max-width: 100%;
+    font-size: var(--text-lg);
     text-align: justify; /* Ensures full-width display */
+    margin-left: 0; /* Aligns with dates and subheading */
+    padding-left: 0; /* Removes any extra padding */
+    line-height: 1.5;
+  }
+
+  .experience-description ul {
+    list-style: disc; /* Restores bullet points */
+    padding-left: 1em; /* Ensures proper bullet point alignment */
+    margin: 0; /* Removes extra space */
+  }
+
+  .experience-description li {
+    list-style-position: outside; /* Ensures bullets align properly */
+    margin-left: 0; /* Resets any unnecessary left margin */
+    padding-left: 0; /* Removes extra padding */
+    text-indent: 0; /* Resets any unwanted indentations */
   }
 </style>

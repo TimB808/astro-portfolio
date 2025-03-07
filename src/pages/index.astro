@@ -29,103 +29,98 @@ const projects = (await getCollection('work'))
 ---
 
 <BaseLayout>
-	<div class="stack gap-20 lg:gap-48">
-		<div class="wrapper stack gap-8 lg:gap-20">
-			<header class="hero">
-				<Hero
-					title="Hello, my name is Tim Beyer"
-					tagline="I am a Data Analyst based in Berlin."
-					align="start"
-				>
-					<div class="roles">
-						<Pill><Icon icon="code" size="1.33em" /> Developer</Pill>
-						<Pill><Icon icon="microphone-stage" size="1.33em" /> Speaker</Pill>
-						<Pill><Icon icon="pencil-line" size="1.33em" /> Writer</Pill>
-					</div>
-				</Hero>
-
-				<img
-					alt="Jeanine White smiling in a red plaid shirt and tortoise shell glasses"
-					width="480"
-					height="620"
-					src="/assets/portrait.jpg"
-				/>
-			</header>
-
-			<Skills />
-		</div>
+  <div class="stack gap-20 lg:gap-48">
+    <div class="wrapper stack gap-8 lg:gap-20">
+      <header class="hero">
+        <Hero
+          title="Hello, my name is Tim Beyer"
+          tagline="I am a Data Analyst based in Berlin."
+          align="start"
+        >
+          <div class="roles">
+            <Pill><Icon icon="code" size="1.33em" /> Developer</Pill>
+            <Pill><Icon icon="microphone-stage" size="1.33em" /> Speaker</Pill>
+            <Pill><Icon icon="pencil-line" size="1.33em" /> Writer</Pill>
+          </div>
+        </Hero>
+        <img
+          alt="Tim Beyer smiling in a red plaid shirt and tortoise shell glasses"
+          width="480"
+          height="620"
+          src="/assets/portrait.jpg"
+        />
+      </header>
+      <Skills />
+    </div>
 
     <main class="stack gap-20 lg:gap-48 with-background">
-      <!-- Projects Section -->
-      <section class="section with-background with-cta">
-        <header class="section-header stack gap-2 lg:gap-4">
-          <h3>Selected Work</h3>
-          <p>Take a look below at some of my featured work for clients from the past few years.</p>
-        </header>
-
-        <div class="gallery">
-          <Grid variant="offset">
-            {
-              projects.map((project) => (
+      <div class="wrapper stack gap-20 lg:gap-48"> <!-- Added wrapper here -->
+        <!-- Projects Section -->
+        <section class="section with-cta">
+          <header class="section-header stack gap-2 lg:gap-4">
+            <h3>Selected Work</h3>
+            <p>Take a look below at some of my featured work for clients from the past few years.</p>
+          </header>
+          <div class="gallery">
+            <Grid variant="offset">
+              { projects.map((project) => (
                 <li>
                   <PortfolioPreview project={project} />
                 </li>
-              ))
-            }
-          </Grid>
-        </div>
+              )) }
+            </Grid>
+          </div>
+          <div class="cta">
+            <CallToAction href="/work/">
+              View All
+              <Icon icon="arrow-right" size="1.2em" />
+            </CallToAction>
+          </div>
+        </section>
 
-        <div class="cta">
-          <CallToAction href="/work/">
-            View All
-            <Icon icon="arrow-right" size="1.2em" />
-          </CallToAction>
-        </div>
-      </section>
-
-      <!-- Mentions Section -->
-      <section class="section with-background bg-variant">
-        <header class="section-header stack gap-2 lg:gap-4">
-          <h3>Mentions</h3>
-          <p>
-            I have been fortunate enough to receive praise for my work in several publications. Take
-            a look below to learn more.
-          </p>
-        </header>
-
-        <div class="gallery">
-          <Grid variant="small">
-            {
-              ['Medium', 'BuzzFeed', 'The Next Web', 'awwwards.', 'TechCrunch'].map((brand) => (
+        <!-- Mentions Section -->
+        <section class="section bg-variant">
+          <header class="section-header stack gap-2 lg:gap-4">
+            <h3>Mentions</h3>
+            <p>I have been fortunate enough to receive praise for my work in several publications.</p>
+          </header>
+          <div class="gallery">
+            <Grid variant="small">
+              { ['Medium', 'BuzzFeed', 'The Next Web', 'awwwards.', 'TechCrunch'].map((brand) => (
                 <li class="mention-card">
                   <p>{brand}</p>
                 </li>
-              ))
-            }
-          </Grid>
-        </div>
-      </section>
+              )) }
+            </Grid>
+          </div>
+        </section>
 
-      <!-- Education Section -->
-      <section class="education-section full-width-section with-background with-cta">
-        <header class="section-header stack gap-2 lg:gap-4">
-          <h3>Education</h3>
-        </header>
-        <EducationList />
-      </section>
+        <!-- Education Section -->
+        <section class="education-section with-cta">
+          <header class="section-header stack gap-2 lg:gap-4">
+            <h3>Education</h3>
+          </header>
+          <EducationList />
+        </section>
 
-      <!-- Work Experience Section -->
-      <section class="experience-section full-width-section with-background bg-variant">
-        <header class="section-header stack gap-2 lg:gap-4">
-          <h3>Work Experience</h3>
-        </header>
-        <ExperienceList />
-      </section>
+        <!-- Work Experience Section -->
+        <section class="experience-section bg-variant">
+          <header class="section-header stack gap-2 lg:gap-4">
+            <h3>Work Experience</h3>
+          </header>
+          <ExperienceList />
+        </section>
+      </div>
 
-      <ContactCTA />
+      <!-- Contact Section -->
+      <div class="wrapper"> <!-- Ensuring the contact CTA is also aligned -->
+        <ContactCTA />
+      </div>
     </main>
   </div>
 </BaseLayout>
+
+
 
 
 
@@ -183,9 +178,25 @@ const projects = (await getCollection('work'))
 
   .education-section .section-header,
   .experience-section .section-header {
+    justify-self: flex-start;
     max-width: 100%;
     text-align: left;
     width: 100%;
+    font-size: var(--text-4xl); /* Match Selected Work */
+    color: var(--gray-100);
+    padding-left: 2.3rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .education-section .section-header h3,
+  .experience-section .section-header h3 {
+    justify-self: flex-start;
+    font-weight: 600; /* Adjust as needed */
+    font-size: var(--text-4xl); /* Match Selected Work */
+    color: var(--gray-100);
+    margin-left: 0; /* Reset any extra margins */
+    padding-left: 0; /* Remove unwanted indentation */
+
   }
 
   .full-width-section {
@@ -216,6 +227,7 @@ const projects = (await getCollection('work'))
 
 	.with-background {
 		position: relative;
+    overflow: hidden; /* Prevent potential overflow issues - CONSIDER REMOVING */
 	}
 
 
@@ -230,7 +242,7 @@ const projects = (await getCollection('work'))
     height: 100%;
 		aspect-ratio: calc(2.25 / var(--bg-scale));
 		top: 0;
-		transform: translateY(-75%) translateX(-50%);
+		transform: translateX(-50%); /*remove the vertical translation  */
 		background:
 			url('/assets/backgrounds/noise.png') top center/220px repeat,
 			var(--hero-bg) center center / var(--bg-gradient-size) no-repeat,

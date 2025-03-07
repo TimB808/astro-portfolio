@@ -1,30 +1,57 @@
 ---
 const education = [
   {
-    school: "University of Example",
-    degree: "MSc Data Science",
-    dates: "2019 - 2021",
-    details: "Focus on machine learning, NLP, and cloud computing. etcetera-----------------------------------------------------------------------------------------",
+    school: "Le Wagon",
+    degree: "Data Science Bootcamp",
+    dates: "2023",
+    details: {
+      intro: "9-week full-time intensive coding bootcamp - Python-based",
+      points: [
+        "Learned Data Analytics, Loading, Preparation and Warehousing with SQL/PostgreSQL, BigQuery, pandas, and NumPy",
+        "Data Visualisation with Matplotlib and Seaborn; Statistics with Scipy and Statsmodels",
+        "Worked with a wide range of structured and unstructured datasets",
+        "Machine Learning with Scikit-learn; Deep Learning with TensorFlow Keras; Data pipelines",
+        "Worked on Data Ops/Product development with Google Cloud Platform, Docker, MLflow, and Streamlit",
+        "Led a project team of 4 to develop Pot Luck, a website applying NLP embedding and K-Means clustering to allow users to search for recipes based on available ingredients"
+      ]
+    }
   },
   {
-    school: "Example College",
-    degree: "BSc Computer Science",
-    dates: "2015 - 2019",
-    details: "Specialised in database management and software development.",
+    school: "University of Edinburgh",
+    degree: "MSc International and European Politics",
+    dates: "2011-12",
+    details: "Postgraduate study with a focus on political analysis and international relations."
+  },
+  {
+    school: "University of Oxford",
+    degree: "BA Modern Languages (French)",
+    dates: "2007-11",
+    details: "Undergraduate degree with a focus on French language and literature."
   }
 ];
 ---
 
 <section class="education-section">
   <header class="section-header">
-    <h3>Delete this part?</h3>
+    <h3>  </h3>
   </header>
   <ul class="education-list">
     {education.map((entry) => (
       <li class="education-item">
         <h4>{entry.school}</h4>
-        <p><strong>{entry.degree}</strong> ({entry.dates})</p>
-        <p>{entry.details}</p>
+        <p class="education-meta"><strong>{entry.degree}</strong> ({entry.dates})</p>
+        {typeof entry.details === 'string' ? (
+          <p class="education-description">{entry.details}</p>
+        ) : (
+          <div class="education-description">
+            <p>{entry.details.intro}</p>
+            <ul>
+              {entry.details.points.map((point) => (
+                <li>{point}</li>
+              ))}
+            </ul>
+          </div>
+        )}
       </li>
     ))}
   </ul>
@@ -32,17 +59,47 @@ const education = [
 
 <style>
   .education-section {
-    padding: 2rem;
+    /* padding: 2rem;
+    max-width: 100%;
+    margin: 0 auto; CHANGED TO TRY FIXIN ALIGNMENT 7/3/25 8.21*/
+    max-width: 83rem; /* Adjust this value based on the width of the hero section */
+    width: 100%;
+    margin: 0 auto; /* Centers the section */
+    padding-left: 0;
+    padding-right: 5rem;
   }
 
   .education-list {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    list-style: none;
   }
 
   .education-item {
-    border-left: 4px solid var(--accent-regular);
-    padding-left: 1rem;
+    padding-left: 0;
+  }
+
+  .education-item h4 {
+    font-size: var(--text-lg);
+    margin-bottom: 0.5rem;
+  }
+
+  .education-meta {
+    font-size: var(--text-lg);
+    font-weight: bold;
+    color: var(--gray-500);
+  }
+
+  .education-description {
+    font-size: var(--text-lg);
+    max-width: 100%;
+    text-align: justify;
+  }
+
+  .education-description ul {
+    list-style: disc;
+    padding-left: 1em;
+    line-height: 1.5;
   }
 </style>
