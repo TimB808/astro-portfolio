@@ -32,13 +32,6 @@ const experienceBg = workProjects.find((project) => project.id === 'h20')?.data.
 
 ---
 
-
-
-
-
-
----
-
 <BaseLayout>
   <div class="stack gap-20 lg:gap-48">
     <div class="wrapper stack gap-8 lg:gap-20">
@@ -50,10 +43,10 @@ const experienceBg = workProjects.find((project) => project.id === 'h20')?.data.
           align="start"
         >
         <!-- Download CV Button -->
-          <CallToAction href="/assets/CV-Tim-Beyer.pdf" download>
-            Download CV
-            <Icon icon="download" size="1.2em" />
-          </CallToAction>
+        <CallToAction href="/assets/CV-Tim-Beyer.pdf" target="_blank" rel="noopener noreferrer" download="Tim-Beyer-CV.pdf">
+          Download CV
+          <Icon icon="download" size="1.2em" />
+        </CallToAction>
           <div class="roles">
             <Pill><Icon icon="code" size="1.33em" /> Developer</Pill>
             <Pill><Icon icon="microphone-stage" size="1.33em" /> Speaker</Pill>
