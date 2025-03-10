@@ -65,7 +65,7 @@ const experienceBg = workProjects.find((project) => project.id === 'h20')?.data.
 
     <main class="stack gap-20 lg:gap-48 with-background">
       <div class="wrapper stack gap-20 lg:gap-48"> <!-- Added wrapper here -->
-        <!-- Projects Section -->
+        <!-- OLD Projects Section -->
         <section class="section with-cta">
           <header class="section-header stack gap-2 lg:gap-4">
             <h3>Selected Work</h3>
@@ -88,34 +88,10 @@ const experienceBg = workProjects.find((project) => project.id === 'h20')?.data.
           </div>
         </section>
 
-        <div class="wrapper stack gap-20 lg:gap-48"> <!-- Added wrapper here -->
-          <!-- 2nd Projects Section ADDED 10/3/25 -->
-          <section class="section with-cta">
-            <header class="section-header stack gap-2 lg:gap-4">
-              <h3>Selected Work</h3>
-              <p>Take a look below at some of my featured work for clients from the past few years.</p>
-            </header>
-            <div class="gallery">
-              <Grid variant="offset">
-                { projects.map((project) => (
-                  <li>
-                    <PortfolioPreview project={project} />
-                  </li>
-                )) }
-              </Grid>
-            </div>
-            <div class="cta">
-              <CallToAction href="/work/">
-                View All
-                <Icon icon="arrow-right" size="1.2em" />
-              </CallToAction>
-            </div>
-          </section>
-
-        <!-- Mentions Section -->
+        <!-- Projects Section -->
         <section class="section bg-variant">
           <header class="section-header stack gap-2 lg:gap-4">
-            <h3>Mentions</h3>
+            <h3>Projects</h3>
             <p>I have been fortunate enough to receive praise for my work in several publications.</p>
           </header>
           <div class="gallery">
@@ -130,8 +106,10 @@ const experienceBg = workProjects.find((project) => project.id === 'h20')?.data.
         </section>
 
         <!-- Education Section -->
-        <section class="education-section boxed-section" style={`background-image: url(${educationBg})`}>
-          <header class="section-header stack gap-2 lg:gap-4">
+        <section
+          class="education-section boxed-section"
+          style={!document.documentElement.classList.contains('theme-dark') ? `background-image: url(${educationBg})` : ''}>
+        <header class="section-header stack gap-2 lg:gap-4">
             <h3>Education</h3>
           </header>
           <EducationList />
@@ -202,13 +180,35 @@ const experienceBg = workProjects.find((project) => project.id === 'h20')?.data.
 	/* ====================================================== */
 
 	<style>
+    /* Added down to overlay adjustments 10/3/25 to adapt formatting for dark mode */
+  /* Default (Light Mode) Styles */
   .education-section,
   .experience-section {
     max-width: 100%;
     width: 100vw;
-    padding-left: 0;
-    padding-right: 0;
+    padding: 3rem 2rem;
+    border-radius: 1.5rem;
+    box-shadow: var(--shadow-md);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-blend-mode: overlay;
+    color: var(--gray-100); /* Dark text for light mode */
   }
+
+  /* Dark Mode: Remove Backgrounds & Brighten Text */
+  .theme-dark .education-section,
+  .theme-dark .experience-section {
+    background: none !important; /* Completely remove background */
+    color: var(--gray-300) !important; /* Make text brighter */
+  }
+
+  /* Ensure Headers are Brighter in Dark Mode */
+  .theme-dark .education-section .section-header h3,
+  .theme-dark .experience-section .section-header h3 {
+    color: var(--gray-50); /* Brighter text for readability */
+  }
+
 
   .education-section .section-header,
   .experience-section .section-header {
