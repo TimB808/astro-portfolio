@@ -18,14 +18,25 @@ import Skills from '../components/Skills.astro';
 import EducationList from '../components/EducationList.astro';
 import ExperienceList from '../components/ExperienceList.astro';
 
-
 // Content Fetching: List four most recent work projects
 const projects = (await getCollection('work'))
 	.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
 	.slice(0, 4);
 
-// Full Astro Component Syntax:
-// https://docs.astro.build/basics/astro-components/
+// Fetch work collection to get background images
+const workProjects = await getCollection('work');
+
+// Find the specific background images
+const educationBg = workProjects.find((project) => project.id === 'nested/duvet-genius')?.data.img || '';
+const experienceBg = workProjects.find((project) => project.id === 'h20')?.data.img || '';
+
+---
+
+
+
+
+
+
 ---
 
 <BaseLayout>
@@ -78,6 +89,30 @@ const projects = (await getCollection('work'))
           </div>
         </section>
 
+        <div class="wrapper stack gap-20 lg:gap-48"> <!-- Added wrapper here -->
+          <!-- 2nd Projects Section ADDED 10/3/25 -->
+          <section class="section with-cta">
+            <header class="section-header stack gap-2 lg:gap-4">
+              <h3>Selected Work</h3>
+              <p>Take a look below at some of my featured work for clients from the past few years.</p>
+            </header>
+            <div class="gallery">
+              <Grid variant="offset">
+                { projects.map((project) => (
+                  <li>
+                    <PortfolioPreview project={project} />
+                  </li>
+                )) }
+              </Grid>
+            </div>
+            <div class="cta">
+              <CallToAction href="/work/">
+                View All
+                <Icon icon="arrow-right" size="1.2em" />
+              </CallToAction>
+            </div>
+          </section>
+
         <!-- Mentions Section -->
         <section class="section bg-variant">
           <header class="section-header stack gap-2 lg:gap-4">
@@ -96,7 +131,7 @@ const projects = (await getCollection('work'))
         </section>
 
         <!-- Education Section -->
-        <section class="education-section with-cta">
+        <section class="education-section boxed-section" style={`background-image: url(${educationBg})`}>
           <header class="section-header stack gap-2 lg:gap-4">
             <h3>Education</h3>
           </header>
@@ -104,13 +139,13 @@ const projects = (await getCollection('work'))
         </section>
 
         <!-- Work Experience Section -->
-        <section class="experience-section bg-variant">
+        <section class="experience-section boxed-section" style={`background-image: url(${experienceBg})`}>
           <header class="section-header stack gap-2 lg:gap-4">
             <h3>Work Experience</h3>
           </header>
           <ExperienceList />
         </section>
-      </div>
+
 
       <!-- Contact Section -->
       <div class="wrapper"> <!-- Ensuring the contact CTA is also aligned -->

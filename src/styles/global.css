@@ -134,6 +134,24 @@ body {
 	line-height: 1.5;
 }
 
+/* Boxed Section Base Styles - ADDED 10/3/25*/
+.boxed-section {
+  position: relative;
+  max-width: 100%;
+  width: 100%;
+  padding: 3rem 2rem;
+  border-radius: 1.5rem;
+  box-shadow: var(--shadow-md);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  /* Change blend mode & background color to make image fainter */
+  background-blend-mode: lighten; /* Try "lighten" - best, "soft-light" - 2nd best, or "multiply" */
+  background-color: rgba(255, 255, 255, 0.6); /* Adjust transparency (higher = more faded) */
+}
+
+
 
 *,
 *::after,
