@@ -2,16 +2,18 @@
 interface Props {
 	title: string;
 	tagline?: string;
+	subtext?: string; /* Add this */
 	align?: 'start' | 'center';
 }
 
-const { align = 'center', tagline, title } = Astro.props;
+const { align = 'center', tagline, subtext, title } = Astro.props;
 ---
 
 <div class:list={['hero stack gap-4', align]}>
 	<div class="stack gap-2">
 		<h1 class="title">{title}</h1>
 		{tagline && <p class="tagline">{tagline}</p>}
+		{subtext && <p class="subtext">{subtext}</p>} <!-- Add this -->
 	</div>
 	<slot />
 </div>
@@ -23,7 +25,8 @@ const { align = 'center', tagline, title } = Astro.props;
 	}
 
 	.title,
-	.tagline {
+	.tagline,
+	.subtext {
 		max-width: 37ch;
 		margin-inline: auto;
 	}
@@ -31,6 +34,16 @@ const { align = 'center', tagline, title } = Astro.props;
 	.title {
 		font-size: var(--text-3xl);
 		color: var(--gray-0);
+	}
+
+	.tagline {
+		font-size: var(--text-lg); /* Keep tagline larger */
+		color: var(--gray-200);
+	}
+
+	.subtext {
+		font-size: var(--text-md); /* Match section text */
+		color: var(--gray-300); /* Same color as section text */
 	}
 
 	@media (min-width: 50em) {
@@ -43,7 +56,8 @@ const { align = 'center', tagline, title } = Astro.props;
 		}
 
 		.start .title,
-		.start .tagline {
+		.start .tagline,
+		.start .subtext {
 			margin-inline: unset;
 		}
 

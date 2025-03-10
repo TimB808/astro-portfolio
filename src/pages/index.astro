@@ -45,9 +45,15 @@ const experienceBg = workProjects.find((project) => project.id === 'h20')?.data.
       <header class="hero">
         <Hero
           title="Hello, my name is Tim Beyer"
-          tagline="I am a Data Analyst based in Berlin."
+          tagline="I'm a data analyst based in Berlin."
+          subtext="I have a strong foundation in data manipulation, analysis, visualization and machine learning/deep learning, gained through intensive bootcamp and hands-on project experience. With problem-solving, critical thinking and interpersonal/communication skills honed over 7 years in international development, consulting and government, I'm eager to join a new team where I can keep developing my coding skills."
           align="start"
         >
+        <!-- Download CV Button -->
+          <CallToAction href="/assets/CV-Tim-Beyer.pdf" download>
+            Download CV
+            <Icon icon="download" size="1.2em" />
+          </CallToAction>
           <div class="roles">
             <Pill><Icon icon="code" size="1.33em" /> Developer</Pill>
             <Pill><Icon icon="microphone-stage" size="1.33em" /> Speaker</Pill>
@@ -55,10 +61,10 @@ const experienceBg = workProjects.find((project) => project.id === 'h20')?.data.
           </div>
         </Hero>
         <img
-          alt="Tim Beyer smiling in a red plaid shirt and tortoise shell glasses"
+          alt="Tim Beyer smiling in front of white wall"
           width="480"
           height="620"
-          src="/assets/portrait.jpg"
+          src="/assets/TB-portrait-3.jpg"
         />
       </header>
       <Skills />
