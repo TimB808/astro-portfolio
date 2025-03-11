@@ -151,6 +151,25 @@ body {
   background-color: rgba(255, 255, 255, 0.6); /* Adjust transparency (higher = more faded) */
 }
 
+/* dark mode Styles - ADDED 11/3/25*/
+/* ✅ Force Experience & Education text to match Projects section */
+.theme-dark .education-section,
+.theme-dark .experience-section {
+  color: var(--gray-300) !important; /* Use the same color as the Projects section */
+}
+
+/* ✅ Ensure descriptions and list items also match */
+.theme-dark .experience-description,
+.theme-dark .education-description {
+  color: var(--gray-300) !important; /* Ensures readability */
+}
+
+.theme-dark .experience-description li,
+.theme-dark .education-description li {
+  color: var(--gray-300) !important;
+}
+
+
 
 
 *,

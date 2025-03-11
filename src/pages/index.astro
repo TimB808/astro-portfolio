@@ -17,8 +17,9 @@ import ContactCTA from '../components/ContactCTA.astro';
 import Skills from '../components/Skills.astro';
 import EducationList from '../components/EducationList.astro';
 import ExperienceList from '../components/ExperienceList.astro';
+import PortfolioProjects from '../components/projects.js';
 
-// Content Fetching: List four most recent work projects
+// Content Fetching: List four most recent selected work
 const projects = (await getCollection('work'))
 	.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
 	.slice(0, 4);
@@ -39,7 +40,7 @@ const experienceBg = workProjects.find((project) => project.id === 'h20')?.data.
         <Hero
           title="Hello, my name is Tim Beyer"
           tagline="I'm a data analyst based in Berlin."
-          subtext="I have a strong foundation in data manipulation, analysis, visualization and machine learning/deep learning, gained through intensive bootcamp and hands-on project experience. With problem-solving, critical thinking and interpersonal/communication skills honed over 7 years in international development, consulting and government, I'm eager to join a new team where I can keep developing my coding skills."
+          subtext=" With problem-solving, critical thinking and interpersonal/communication skills honed over 7 years in international development, consulting and government, I'm eager to join a new team where I can keep developing my coding skills."
           align="start"
         >
         <!-- Download CV Button -->
@@ -48,9 +49,9 @@ const experienceBg = workProjects.find((project) => project.id === 'h20')?.data.
           <Icon icon="download" size="1.2em" />
         </CallToAction>
           <div class="roles">
-            <Pill><Icon icon="code" size="1.33em" /> Developer</Pill>
-            <Pill><Icon icon="microphone-stage" size="1.33em" /> Speaker</Pill>
-            <Pill><Icon icon="pencil-line" size="1.33em" /> Writer</Pill>
+            <Pill><Icon icon="code" size="1.33em" /> Python </Pill>
+            <Pill><Icon icon="microphone-stage" size="1.33em" /> SQL </Pill>
+            <Pill><Icon icon="pencil-line" size="1.33em" /> Project Management </Pill>
           </div>
         </Hero>
         <img
@@ -65,7 +66,34 @@ const experienceBg = workProjects.find((project) => project.id === 'h20')?.data.
 
     <main class="stack gap-20 lg:gap-48 with-background">
       <div class="wrapper stack gap-20 lg:gap-48"> <!-- Added wrapper here -->
-        <!-- OLD Projects Section -->
+        <!-- Selected work Section -->
+
+        <section class="section bg-variant">
+          <header class="section-header stack gap-2 lg:gap-4">
+            <h3>Projects</h3>
+          </header>
+          <div class="gallery">
+            <Grid variant="small">
+              {PortfolioProjects.map((project) => (
+                <li class="mention-card">
+                  <img src={project.image} alt={project.title} />
+                  <h4>
+                    <a href={project.link || project.github} target="_blank" rel="noopener noreferrer">
+                      {project.title}
+                    </a>
+                  </h4>
+                  <p>{project.description}</p>
+                  {project.github && (
+                    <p>
+                      <strong>GitHub:</strong> <a href={project.github} target="_blank" rel="noopener noreferrer">{project.github}</a>
+                    </p>
+                  )}
+                </li>
+              ))}
+            </Grid>
+          </div>
+        </section>
+
         <section class="section with-cta">
           <header class="section-header stack gap-2 lg:gap-4">
             <h3>Selected Work</h3>
@@ -88,7 +116,7 @@ const experienceBg = workProjects.find((project) => project.id === 'h20')?.data.
           </div>
         </section>
 
-        <!-- Projects Section -->
+        <!-- NEW Projects Section -->
         <section class="section bg-variant">
           <header class="section-header stack gap-2 lg:gap-4">
             <h3>Projects</h3>
@@ -105,11 +133,11 @@ const experienceBg = workProjects.find((project) => project.id === 'h20')?.data.
           </div>
         </section>
 
+
+
         <!-- Education Section -->
-        <section
-          class="education-section boxed-section"
-          style={!document.documentElement.classList.contains('theme-dark') ? `background-image: url(${educationBg})` : ''}>
-        <header class="section-header stack gap-2 lg:gap-4">
+        <section class="education-section boxed-section" style={`background-image: url(${educationBg})`}>
+          <header class="section-header stack gap-2 lg:gap-4">
             <h3>Education</h3>
           </header>
           <EducationList />
@@ -122,7 +150,6 @@ const experienceBg = workProjects.find((project) => project.id === 'h20')?.data.
           </header>
           <ExperienceList />
         </section>
-
 
       <!-- Contact Section -->
       <div class="wrapper"> <!-- Ensuring the contact CTA is also aligned -->
@@ -182,32 +209,70 @@ const experienceBg = workProjects.find((project) => project.id === 'h20')?.data.
 	<style>
     /* Added down to overlay adjustments 10/3/25 to adapt formatting for dark mode */
   /* Default (Light Mode) Styles */
-  .education-section,
-  .experience-section {
-    max-width: 100%;
-    width: 100vw;
-    padding: 3rem 2rem;
-    border-radius: 1.5rem;
-    box-shadow: var(--shadow-md);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-blend-mode: overlay;
-    color: var(--gray-100); /* Dark text for light mode */
-  }
+/* ✅ Light Mode: Apply Background */
+/* ✅ Light Mode: Apply Background */
+.education-section,
+.experience-section {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-blend-mode: overlay;
+  color: var(--gray-100);
+  transition: background 0.3s ease-in-out;
+}
 
-  /* Dark Mode: Remove Backgrounds & Brighten Text */
-  .theme-dark .education-section,
-  .theme-dark .experience-section {
-    background: none !important; /* Completely remove background */
-    color: var(--gray-300) !important; /* Make text brighter */
-  }
+/* ✅ Common Styles for Both Themes */
+.education-section,
+.experience-section {
+  max-width: 100%;
+  width: 100vw;
+  padding: 3rem 2rem;
+  border-radius: 1.5rem;
+  box-shadow: var(--shadow-md);
+}
 
-  /* Ensure Headers are Brighter in Dark Mode */
-  .theme-dark .education-section .section-header h3,
-  .theme-dark .experience-section .section-header h3 {
-    color: var(--gray-50); /* Brighter text for readability */
-  }
+/* ✅ Dark Mode: Remove Background */
+.theme-dark .education-section,
+.theme-dark .experience-section {
+  background: var(--gray-900) !important;
+  background-image: none !important;
+  color: var(--gray-300) !important;
+  border-radius: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  padding: 3rem 2rem;
+}
+
+
+/* ✅ Ensure Text Doesn't Invert */
+.theme-dark .education-section *,
+.theme-dark .experience-section * {
+  filter: none !important;
+}
+
+/* ✅ Ensure Headers are Brighter in Dark Mode */
+.theme-dark .education-section .section-header h3,
+.theme-dark .experience-section .section-header h3 {
+  color: var(--gray-50) !important;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* ✅ Improve Readability for Descriptions */
+.theme-dark .experience-description,
+.theme-dark .education-description {
+  color: var(--gray-200) !important;
+  font-size: var(--text-md);
+  line-height: 1.6;
+}
+
+/* ✅ Ensure List Items Stand Out */
+.theme-dark .experience-description li,
+.theme-dark .education-description li {
+  color: var(--gray-100) !important;
+  font-size: var(--text-md);
+  line-height: 1.5;
+}
+
+
 
 
   .education-section .section-header,
@@ -340,23 +405,57 @@ const experienceBg = workProjects.find((project) => project.id === 'h20')?.data.
 
 	/* ====================================================== */
 
-	.mention-card {
-		display: flex;
-		height: 7rem;
-		justify-content: center;
-		align-items: center;
-		text-align: center;
-		border: 1px solid var(--gray-800);
-		border-radius: 1.5rem;
-		color: var(--gray-300);
-		background: var(--gradient-subtle);
-		box-shadow: var(--shadow-sm);
-	}
+  .mention-card {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center;
+    text-align: center;
+    border: 1px solid var(--gray-800);
+    border-radius: 1.5rem;
+    color: var(--gray-300);
+    background: var(--gradient-subtle);
+    box-shadow: var(--shadow-sm);
+    padding: 1rem; /* Add padding for spacing */
+    overflow: hidden; /* Ensures nothing spills out */
+  }
 
-	@media (min-width: 50em) {
-		.mention-card {
-			border-radius: 1.5rem;
-			height: 9.5rem;
-		}
-	}
+  .mention-card img {
+    width: 100%; /* Make the image span the width */
+    height: 6rem; /* Set a fixed height for consistency */
+    object-fit: cover; /* Crop images to fit properly */
+    border-radius: 1rem; /* Slightly rounded corners */
+    margin-bottom: 0.5rem;
+  }
+
+  .mention-card h4 {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+  }
+
+  .mention-card p {
+    font-size: 0.9rem;
+    color: var(--gray-300);
+  }
+
+  .mention-card a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .mention-card a:hover {
+    text-decoration: underline;
+  }
+
+  @media (min-width: 50em) {
+    .mention-card {
+      height: auto; /* Allow it to grow based on content */
+      padding: 1.5rem;
+    }
+
+    .mention-card img {
+      height: 8rem; /* Increase image size for larger screens */
+    }
+  }
+
 </style>
