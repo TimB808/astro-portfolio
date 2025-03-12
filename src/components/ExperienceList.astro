@@ -141,4 +141,23 @@ const experience = [
     padding-left: 0; /* Removes extra padding */
     text-indent: 0; /* Resets any unwanted indentations */
   }
+
+  @media (max-width: 768px) {
+    .education-section,
+    .experience-section {
+      padding: 0.5rem 0.3rem !important; /* Adjust padding for mobile here */
+    }
+
+    .education-list,
+    .experience-list {
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+
+    .education-item,
+    .experience-item {
+      padding-left: 0 !important;
+      margin-left: 0 !important;
+    }
+  }
 </style>

@@ -306,14 +306,21 @@ h5 {
 
   .experience-section .section-header,
   .education-section .section-header {
-    text-align: left; /* Align header text to the left */
-    margin-bottom: 0.5rem !important; /* Reduce extra space */
+    text-align: left !important;
+    padding-left: 0.3rem !important; /* Adjust header indentation here */
+    margin-left: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin-bottom: 0 !important; /* Reduce extra space */
   }
 
   .experience-section .section-header h3,
   .education-section .section-header h3 {
-    text-align: left !important; /* Ensure left alignment */
-    font-size: var(--text-xl) !important;  /* Adjusted to match Projects section - remove if issues */
+    text-align: left !important;
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+    font-size: var(--text-lg) !important; /* Ensure correct size */
+    width: 100% !important;
     margin-bottom: 0 !important; /* Remove unnecessary space */
   }
 
@@ -337,17 +344,32 @@ h5 {
 }
 
 @media (max-width: 768px) {
-  /* Ensure bullet points align in both sections */
-  .experience-description ul,
   .education-description ul {
-    padding-left: 1rem; /* Align bullets properly */
+    list-style-position: outside !important; /* Ensures text starts after the bullet */
+    padding-left: 0.9rem !important; /* Push bullets away from the edge */
+    margin-left: 0 !important;
+  }
+
+  .education-description li {
+    text-indent: 0 !important;
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+  }
+
+  .experience-description ul {
+    padding-left: 1.2rem; /* Slightly increase bullet point alignment */
     margin-left: 0;
   }
 
-  .experience-description li,
-  .education-description li {
+  .experience-description li {
     font-size: var(--text-sm) !important;
     text-indent: 0;
     list-style-position: inside; /* Ensures bullets are inside the container */
+  }
+
+  .education-description p:first-child {
+    margin-bottom: 0.5rem; /* Ensure the first sentence is separated from the list */
+    font-size: var(--text-sm); /* Keep it smaller on mobile */
+    font-weight: 500;
   }
 }

@@ -435,4 +435,11 @@ const experienceBg = workProjects.find((project) => project.id === 'h20')?.data.
     }
   }
 
+  @media (max-width: 768px) {
+  .education-section .section-header h3,
+  .experience-section .section-header h3 {
+    font-size: var(--text-lg) !important; /* Reduce to next smaller size */
+  }
+}
+
 </style>
