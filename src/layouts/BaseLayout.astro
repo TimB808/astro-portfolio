@@ -24,53 +24,49 @@ const { title, description } = Astro.props;
     <div class="stack backgrounds">
       <Nav />
       <slot />
-      <Footer />
     </div>
 
     <!-- ✅ Script to Remove Backgrounds in Dark Mode -->
-    <script>
+    <script defer>
       document.addEventListener("DOMContentLoaded", () => {
-        const updateBackgrounds = () => {
-          const isDarkMode = document.documentElement.classList.contains("theme-dark");
+        const sections = document.querySelectorAll(".education-section, .experience-section");
+        if (!sections.length) return; // Exit early if no sections exist
 
-          document.querySelectorAll(".education-section, .experience-section").forEach((section) => {
-            if (!section) return;
+        const updateBackgrounds = (isDarkMode) => {
+          sections.forEach((section) => {
+            const bgImage = section.getAttribute("data-bg");
 
             if (isDarkMode) {
-              // ✅ Dark Mode: Remove background
               section.style.backgroundImage = "none";
               section.style.backgroundColor = "var(--gray-900)";
               section.style.backgroundBlendMode = "normal";
-            } else {
-              // ✅ Light Mode: Restore background from `data-bg`
-              const bgImage = section.getAttribute("data-bg");
-              if (bgImage) {
-                section.style.backgroundImage = `url(${bgImage})`;
-                section.style.backgroundSize = "cover";
-                section.style.backgroundRepeat = "no-repeat";
-                section.style.backgroundPosition = "center";
-                section.style.backgroundBlendMode = "overlay";
-
-                // ✅ Force a refresh by briefly clearing and resetting background image
-                section.style.display = "none";  // Hide temporarily
-                requestAnimationFrame(() => {
-                  section.style.display = ""; // Reset display (forces re-render)
-                });
-              }
+            } else if (bgImage) {
+              section.style.backgroundImage = `url(${bgImage})`;
+              section.style.backgroundSize = "cover";
+              section.style.backgroundRepeat = "no-repeat";
+              section.style.backgroundPosition = "center";
+              section.style.backgroundBlendMode = "overlay";
             }
           });
         };
 
-        // ✅ Run on page load
-        updateBackgrounds();
+        // Initial check on page load
+        updateBackgrounds(document.documentElement.classList.contains("theme-dark"));
 
-        // ✅ Detect changes in theme dynamically
-        new MutationObserver(updateBackgrounds).observe(document.documentElement, {
-          attributes: true,
-          attributeFilter: ["class"],
+        // Use a single MutationObserver instead of multiple function calls
+        const observer = new MutationObserver((mutations) => {
+          for (const mutation of mutations) {
+            if (mutation.attributeName === "class") {
+              const isDarkMode = document.documentElement.classList.contains("theme-dark");
+              updateBackgrounds(isDarkMode);
+            }
+          }
         });
+
+        observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
       });
     </script>
+
 
 
 

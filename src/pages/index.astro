@@ -38,9 +38,9 @@ const experienceBg = workProjects.find((project) => project.id === 'h20')?.data.
     <div class="wrapper stack gap-8 lg:gap-20">
       <header class="hero">
         <Hero
-          title="Hello, my name is Tim Beyer"
-          tagline="I'm a data analyst based in Berlin."
-          subtext=" With problem-solving, critical thinking and interpersonal/communication skills honed over 7 years in international development, consulting and government, I'm eager to join a new team where I can keep developing my coding skills."
+          title="Hello, I'm Tim Beyer"
+          tagline="Welcome to my portfolio page! I'm a data analyst based in Berlin."
+          subtext=" I have a strong foundation in data manipulation, analysis, visualization and machine learning/deep learning, gained through intensive bootcamp and hands-on project experience. With problem-solving, critical thinking and interpersonal/communication skills honed over seven years in international development, consulting and government, I'm eager to join a new team where I can keep developing my coding skills."
           align="start"
         >
         <!-- Download CV Button -->
@@ -48,11 +48,7 @@ const experienceBg = workProjects.find((project) => project.id === 'h20')?.data.
           Download CV
           <Icon icon="download" size="1.2em" />
         </CallToAction>
-          <div class="roles">
-            <Pill><Icon icon="code" size="1.33em" /> Python </Pill>
-            <Pill><Icon icon="microphone-stage" size="1.33em" /> SQL </Pill>
-            <Pill><Icon icon="pencil-line" size="1.33em" /> Project Management </Pill>
-          </div>
+
         </Hero>
         <img
           alt="Tim Beyer smiling in front of white wall"
@@ -61,7 +57,7 @@ const experienceBg = workProjects.find((project) => project.id === 'h20')?.data.
           src="/assets/TB-portrait-3.jpg"
         />
       </header>
-      <Skills />
+
     </div>
 
     <main class="stack gap-20 lg:gap-48 with-background">
@@ -116,24 +112,6 @@ const experienceBg = workProjects.find((project) => project.id === 'h20')?.data.
           </div>
         </section>
 
-        <!-- NEW Projects Section -->
-        <section class="section bg-variant">
-          <header class="section-header stack gap-2 lg:gap-4">
-            <h3>Projects</h3>
-            <p>I have been fortunate enough to receive praise for my work in several publications.</p>
-          </header>
-          <div class="gallery">
-            <Grid variant="small">
-              { ['Medium', 'BuzzFeed', 'The Next Web', 'awwwards.', 'TechCrunch'].map((brand) => (
-                <li class="mention-card">
-                  <p>{brand}</p>
-                </li>
-              )) }
-            </Grid>
-          </div>
-        </section>
-
-
 
         <!-- Education Section -->
         <section class="education-section boxed-section" style={`background-image: url(${educationBg})`}>
@@ -150,7 +128,6 @@ const experienceBg = workProjects.find((project) => project.id === 'h20')?.data.
           </header>
           <ExperienceList />
         </section>
-
       <!-- Contact Section -->
       <div class="wrapper"> <!-- Ensuring the contact CTA is also aligned -->
         <ContactCTA />
@@ -291,7 +268,7 @@ const experienceBg = workProjects.find((project) => project.id === 'h20')?.data.
   .experience-section .section-header h3 {
     justify-self: flex-start;
     font-weight: 600; /* Adjust as needed */
-    font-size: var(--text-4xl); /* Match Selected Work */
+    font-size: var(--text-2xl) !important; /* Match Project section */
     color: var(--gray-100);
     margin-left: 0; /* Reset any extra margins */
     padding-left: 0; /* Remove unwanted indentation */

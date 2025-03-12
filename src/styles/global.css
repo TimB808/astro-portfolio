@@ -296,3 +296,58 @@ h5 {
 		gap: 12rem;
 	}
 }
+
+/* Added 12/3/25 to optimise for mobile */
+@media (max-width: 768px) {
+  .section-header {
+    max-width: 90%; /* Allow more width for smaller screens */
+  }
+
+
+  .experience-section .section-header,
+  .education-section .section-header {
+    text-align: left; /* Align header text to the left */
+    margin-bottom: 0.5rem !important; /* Reduce extra space */
+  }
+
+  .experience-section .section-header h3,
+  .education-section .section-header h3 {
+    text-align: left !important; /* Ensure left alignment */
+    font-size: var(--text-xl) !important;  /* Adjusted to match Projects section - remove if issues */
+    margin-bottom: 0 !important; /* Remove unnecessary space */
+  }
+
+  /* Match font sizes across Experience & Education */
+  .experience-item h4,
+  .education-item h4 {
+    font-size: var(--text-sm) !important; /* Reduce job title size */
+  }
+
+  .experience-meta,
+  .education-meta {
+    font-size: var(--text-sm) !important; /* Reduce date & location text */
+  }
+
+  .experience-description,
+  .education-description {
+    font-size: var(--text-sm) !important;
+    line-height: 1.4;
+  }
+
+}
+
+@media (max-width: 768px) {
+  /* Ensure bullet points align in both sections */
+  .experience-description ul,
+  .education-description ul {
+    padding-left: 1rem; /* Align bullets properly */
+    margin-left: 0;
+  }
+
+  .experience-description li,
+  .education-description li {
+    font-size: var(--text-sm) !important;
+    text-indent: 0;
+    list-style-position: inside; /* Ensures bullets are inside the container */
+  }
+}
