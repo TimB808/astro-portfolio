@@ -299,6 +299,11 @@ h5 {
 
 /* Added 12/3/25 to optimise for mobile */
 @media (max-width: 768px) {
+  .education-section .education-description,
+  .experience-section .experience-description {
+    text-align: left !important; /* Ensure text is not justified */
+  }
+
   .section-header {
     max-width: 90%; /* Allow more width for smaller screens */
   }

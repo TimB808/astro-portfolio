@@ -58,4 +58,24 @@ import Icon from './Icon.astro';
 			text-align: left;
 		}
 	}
+  @media (max-width: 768px) {
+    aside {
+      padding: 2rem 1rem !important; /* Reduce padding for better spacing */
+      gap: 1.5rem !important; /* Reduce spacing between elements */
+      text-align: center !important; /* Ensure everything is centered */
+      border-radius: 1rem !important; /* Slightly smaller rounding */
+    }
+
+    aside h2 {
+      font-size: var(--text-lg) !important; /* Reduce font size */
+      max-width: 100% !important;
+      text-align: center !important; /* Center align text */
+    }
+
+    aside a {
+      font-size: var(--text-md) !important; /* Make button text readable */
+      padding: 0.75rem 1rem !important; /* Adjust button padding */
+    }
+  }
+
 </style>
