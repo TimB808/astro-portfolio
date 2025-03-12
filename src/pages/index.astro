@@ -40,18 +40,20 @@ const experienceBg = workProjects.find((project) => project.id === 'h20')?.data.
     <div class="wrapper stack gap-8 lg:gap-20">
       <header class="hero">
         <Hero
-          title="Welcome to.... ... ... ... .... ............!"
-          tagline="I'm a data analyst based in Berlin. With strong skills in SQL, Python, data analysis and data science, and a background in project management, I'm looking for a new challenge"
-          subtext=" I have a strong foundation in data manipulation, analysis, visualization and machine learning/deep learning, gained through intensive bootcamp and hands-on project experience. With problem-solving, critical thinking and interpersonal/communication skills honed over seven years in international development, consulting and government, I'm eager to join a new team where I can keep developing my coding skills."
+          title="Welcome to my portfolio"
+          tagline="I'm a data analyst based in Berlin. With a strong foundation in SQL, Python, and data analysis, and a background in project management, I'm looking for a new challenge!"
+          subtext=""
           align="start"
         >
-        <!-- Download CV Button -->
-        <CallToAction href="/assets/CV-Tim-Beyer.pdf" target="_blank" rel="noopener noreferrer" download="Tim-Beyer-CV.pdf">
-          Download CV
-          <Icon icon="download" size="1.2em" />
-        </CallToAction>
-
+          <!-- ✅ Wrap button inside a div for styling -->
+          <div class="hero-cta">
+            <CallToAction href="/assets/CV-Tim-Beyer.pdf" target="_blank" rel="noopener noreferrer" download="Tim-Beyer-CV.pdf">
+              Download CV
+              <Icon icon="download" size="1.2em" />
+            </CallToAction>
+          </div>
         </Hero>
+
         <img
           alt="Tim Beyer smiling in front of white wall"
           width="480"
@@ -132,6 +134,23 @@ const experienceBg = workProjects.find((project) => project.id === 'h20')?.data.
 		gap: 2rem;
 	}
 
+  /* ✅ Center button on mobile */
+  .hero-cta {
+    display: flex;
+    justify-content: center; /* ✅ Centers the button */
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  /* ✅ Ensure button doesn’t shrink */
+  .hero-cta > * {
+    width: auto;
+    min-width: fit-content;
+    padding: 0.75rem 1.5rem;
+    font-size: var(--text-md);
+  }
+
+
 	.roles {
 		display: none;
 	}
@@ -155,6 +174,13 @@ const experienceBg = workProjects.find((project) => project.id === 'h20')?.data.
 
     .hero-content {
         max-width: 37ch; /* ✅ Forces the right margin to match title */
+    }
+
+    /* ✅ Left-align cv button in larger screens */
+    @media (min-width: 50em) {
+      .hero-cta {
+        justify-content: flex-start; /* ✅ Moves button to the left */
+      }
     }
 
 		.roles {

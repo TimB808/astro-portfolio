@@ -41,17 +41,22 @@ const isCurrentPage = (href: string) => {
 		</menu-button>
 	</div>
 	<noscript>
-		<ul class="nav-items">
-			{
-				textLinks.map(({ label, href }) => (
-					<li>
-						<a aria-current={isCurrentPage(href) ? 'page' : null} class="link" href={href}>
-							{label}
-						</a>
-					</li>
-				))
-			}
-		</ul>
+    <ul class="nav-items">
+      {
+        textLinks.map(({ label, href }) => (
+          <li>
+            <a
+              aria-current={isCurrentPage(href) ? 'page' : null}
+              class="link scroll-link"  <!-- ✅ Added scroll-link class -->
+              href={href}
+            >
+              {label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
 	</noscript>
 	<noscript>
 		<div class="menu-footer">
@@ -107,34 +112,65 @@ const isCurrentPage = (href: string) => {
 			// Inject menu toggle button when JS runs.
 			this.appendChild(this.querySelector('template')!.content.cloneNode(true));
 			const btn = this.querySelector('button')!;
-
-			// Hide menu (shown by default to support no-JS browsers).
 			const menu = document.getElementById('menu-content')!;
+
 			menu.hidden = true;
-			// Add "menu-content" class in JS to avoid covering content in non-JS browsers.
 			menu.classList.add('menu-content');
 
-			/** Set whether the menu is currently expanded or collapsed. */
-			const setExpanded = (expand: boolean) => {
+			const setExpanded = (expand) => {
 				btn.setAttribute('aria-expanded', expand ? 'true' : 'false');
 				menu.hidden = !expand;
 			};
 
-			// Toggle menu visibility when the menu button is clicked.
 			btn.addEventListener('click', () => setExpanded(menu.hidden));
 
 			// Hide menu button for large screens.
-			const handleViewports = (e: MediaQueryList | MediaQueryListEvent) => {
+			const handleViewports = (e) => {
 				setExpanded(e.matches);
 				btn.hidden = e.matches;
 			};
 			const mediaQueries = window.matchMedia('(min-width: 50em)');
 			handleViewports(mediaQueries);
 			mediaQueries.addEventListener('change', handleViewports);
+
+			// Close menu when clicking outside (for mobile)
+			document.addEventListener("click", (event) => {
+				if (!menu.contains(event.target) && !btn.contains(event.target)) {
+					setExpanded(false);
+				}
+			});
 		}
 	}
 	customElements.define('menu-button', MenuButton);
+
+	// Smooth scrolling and close menu after clicking a link
+	document.addEventListener("DOMContentLoaded", () => {
+		const menu = document.getElementById('menu-content');
+		const btn = document.querySelector(".menu-button");
+
+		document.querySelectorAll(".scroll-link").forEach(link => {
+			link.addEventListener("click", (event) => {
+				event.preventDefault();
+				const targetId = link.getAttribute("href").substring(1);
+				const targetSection = document.getElementById(targetId);
+
+				if (targetSection) {
+					targetSection.scrollIntoView({ behavior: "smooth" });
+
+					// ✅ Close mobile menu AFTER smooth scrolling completes
+					if (window.innerWidth < 800) {
+						setTimeout(() => {
+							menu.hidden = true;
+							btn.setAttribute("aria-expanded", "false");
+						}, 500); // Delay to ensure smooth scroll finishes
+					}
+				}
+			});
+		});
+	});
 </script>
+
+
 
 <style>
 	nav {
