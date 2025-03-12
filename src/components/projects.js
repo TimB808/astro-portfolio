@@ -1,6 +1,6 @@
 const projects = [
   {
-    title: "What’s in a name",
+    title: "What’s in a name?",
     description: "Name generator app built with Python and SQLite, using a FastAPI/Uvicorn backend and deployed with Streamlit, Docker and Cloud Run, allowing users to create new, unique names based on simple patterns.",
     link: "https://name-gen-ui-581282400880.europe-west1.run.app/",
     github: "https://github.com/TimB808/name-generator-public",

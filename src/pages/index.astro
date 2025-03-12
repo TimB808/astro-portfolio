@@ -40,8 +40,8 @@ const experienceBg = workProjects.find((project) => project.id === 'h20')?.data.
     <div class="wrapper stack gap-8 lg:gap-20">
       <header class="hero">
         <Hero
-          title="Hello, I'm Tim Beyer"
-          tagline="Welcome to my portfolio page! I'm a data analyst based in Berlin."
+          title="Welcome to.... ... ... ... .... ............!"
+          tagline="I'm a data analyst based in Berlin. With strong skills in SQL, Python, data analysis and data science, and a background in project management, I'm looking for a new challenge"
           subtext=" I have a strong foundation in data manipulation, analysis, visualization and machine learning/deep learning, gained through intensive bootcamp and hands-on project experience. With problem-solving, critical thinking and interpersonal/communication skills honed over seven years in international development, consulting and government, I'm eager to join a new team where I can keep developing my coding skills."
           align="start"
         >
@@ -64,54 +64,53 @@ const experienceBg = workProjects.find((project) => project.id === 'h20')?.data.
 
     <main class="stack gap-20 lg:gap-48 with-background">
       <div class="wrapper stack gap-20 lg:gap-48"> <!-- Added wrapper here -->
-        <!-- Projects Section -->
+<!-- Projects Section -->
+    <section id="projects" class="section bg-variant">
+      <header class="section-header stack gap-2 lg:gap-4">
+        <h3>Projects</h3>
+      </header>
+      <div class="gallery">
+        <Grid variant="small">
+          {PortfolioProjects.map((project) => (
+            <li class="mention-card">
+              <img src={project.image} alt={project.title} />
+              <h4>
+                <a href={project.link || project.github} target="_blank" rel="noopener noreferrer">
+                  {project.title} <Icon icon="external-link" class="external-link-icon" />
+                </a>
+              </h4>
+              <p class="project-description">{project.description}</p>
+              <p>
+                <strong></strong>
+                {project.github ? (
+                  <a href={project.github} target="_blank" rel="noopener noreferrer">
+                    GitHub repo <Icon icon="external-link" class="external-link-icon" />
+                  </a>
+                ) : (
+                  <span class="placeholder">No repo available</span>
+                )}
+              </p>
+            </li>
+          ))}
+        </Grid>
+      </div>
+    </section>
 
-        <section class="section bg-variant">
-          <header class="section-header stack gap-2 lg:gap-4">
-            <h3>Projects</h3>
-          </header>
-          <div class="gallery">
-            <Grid variant="small">
-              {PortfolioProjects.map((project) => (
-                <li class="mention-card">
-                  <img src={project.image} alt={project.title} />
-                  <h4>
-                    <a href={project.link || project.github} target="_blank" rel="noopener noreferrer">
-                      {project.title} <Icon icon="external-link" class="external-link-icon" />
-                    </a>
-                  </h4>
-                  <p class="project-description">{project.description}</p>
-                  <p>
-                    <strong></strong>
-                    {project.github ? (
-                      <a href={project.github} target="_blank" rel="noopener noreferrer">
-                        GitHub repo <Icon icon="external-link" class="external-link-icon" />
-                      </a>
-                    ) : (
-                      <span class="placeholder">No repo available</span>
-                    )}
-                  </p>
-                </li>
+    <!-- Education Section -->
+    <section id="education" class="education-section boxed-section" style={`background-image: url(${educationBg})`}>
+      <header class="section-header stack gap-2 lg:gap-4">
+        <h3>Education</h3>
+      </header>
+      <EducationList />
+    </section>
 
-              ))}
-            </Grid>
-          </div>
-        </section>
-        <!-- Education Section -->
-        <section class="education-section boxed-section" style={`background-image: url(${educationBg})`}>
-          <header class="section-header stack gap-2 lg:gap-4">
-            <h3>Education</h3>
-          </header>
-          <EducationList />
-        </section>
-
-        <!-- Work Experience Section -->
-        <section class="experience-section boxed-section" style={`background-image: url(${experienceBg})`}>
-          <header class="section-header stack gap-2 lg:gap-4">
-            <h3>Work Experience</h3>
-          </header>
-          <ExperienceList />
-        </section>
+    <!-- Work Experience Section -->
+    <section id="experience" class="experience-section boxed-section" style={`background-image: url(${experienceBg})`}>
+      <header class="section-header stack gap-2 lg:gap-4">
+        <h3>Work Experience</h3>
+      </header>
+      <ExperienceList />
+    </section>
       <!-- Contact Section -->
       <div class="wrapper"> <!-- Ensuring the contact CTA is also aligned -->
         <ContactCTA />
@@ -128,7 +127,8 @@ const experienceBg = workProjects.find((project) => project.id === 'h20')?.data.
 	.hero {
 		display: flex;
 		flex-direction: column;
-		align-items: center;
+		align-items: flex-start !important; /* ✅ Forces left alignment */
+	  text-align: left !important;
 		gap: 2rem;
 	}
 
@@ -146,11 +146,16 @@ const experienceBg = workProjects.find((project) => project.id === 'h20')?.data.
 
 	@media (min-width: 50em) {
 		.hero {
-			display: grid;
-			grid-template-columns: 6fr 4fr;
-			padding-inline: 2.5rem;
-			gap: 3.75rem;
-		}
+        display: grid;
+        grid-template-columns: 6fr 4fr;
+        padding-inline: 2.5rem;
+        gap: 3.75rem;
+        align-items: start; /* ✅ Ensures text stays aligned */
+    }
+
+    .hero-content {
+        max-width: 37ch; /* ✅ Forces the right margin to match title */
+    }
 
 		.roles {
 			margin-top: 0.5rem;

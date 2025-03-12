@@ -406,6 +406,6 @@ h5 {
   aside a {
     font-size: 0.75rem !important;
     padding: 0.4rem 0.6rem !important;
-    transform: scale(0.9) !important;
+    transform: scale(1) !important;
   }
 }

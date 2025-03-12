@@ -2,7 +2,7 @@
 interface Props {
 	title: string;
 	tagline?: string;
-	subtext?: string; /* Add this */
+	subtext?: string;
 	align?: 'start' | 'center';
 }
 
@@ -10,25 +10,33 @@ const { align = 'center', tagline, subtext, title } = Astro.props;
 ---
 
 <div class:list={['hero stack gap-4', align]}>
-	<div class="stack gap-2">
+	<div class="hero-content stack gap-2"> <!-- ✅ New wrapper to control width -->
 		<h1 class="title">{title}</h1>
 		{tagline && <p class="tagline">{tagline}</p>}
-		{subtext && <p class="subtext">{subtext}</p>} <!-- Add this -->
+		{subtext && <p class="subtext">{subtext}</p>}
 	</div>
 	<slot />
 </div>
 
 <style>
 	.hero {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 2rem;
 		font-size: var(--text-lg);
-		text-align: center;
+		text-align: left !important;
+	}
+
+	.hero-content {
+		max-width: 37ch; /* ✅ Matches title width */
 	}
 
 	.title,
 	.tagline,
 	.subtext {
-		max-width: 37ch;
-		margin-inline: auto;
+		margin-inline: unset;
+		text-align: left !important;
 	}
 
 	.title {
@@ -37,13 +45,13 @@ const { align = 'center', tagline, subtext, title } = Astro.props;
 	}
 
 	.tagline {
-		font-size: var(--text-lg); /* Keep tagline larger */
+		font-size: var(--text-lg);
 		color: var(--gray-200);
 	}
 
 	.subtext {
-		font-size: var(--text-md); /* Match section text */
-		color: var(--gray-300); /* Same color as section text */
+		font-size: var(--text-md);
+		color: var(--gray-300);
 	}
 
 	@media (min-width: 50em) {
@@ -51,14 +59,8 @@ const { align = 'center', tagline, subtext, title } = Astro.props;
 			font-size: var(--text-xl);
 		}
 
-		.start {
-			text-align: start;
-		}
-
-		.start .title,
-		.start .tagline,
-		.start .subtext {
-			margin-inline: unset;
+		.hero-content {
+			max-width: 37ch; /* ✅ Prevents tagline/subtext from shifting left */
 		}
 
 		.title {
