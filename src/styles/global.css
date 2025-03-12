@@ -297,6 +297,10 @@ h5 {
 	}
 }
 
+.project-description {
+  text-align: left;
+}
+
 /* Added 12/3/25 to optimise for mobile */
 @media (max-width: 768px) {
   .education-section .education-description,
@@ -376,5 +380,32 @@ h5 {
     margin-bottom: 0.5rem; /* Ensure the first sentence is separated from the list */
     font-size: var(--text-sm); /* Keep it smaller on mobile */
     font-weight: 500;
+  }
+
+  /* To make project boxes same size in mobile*/
+  .placeholder {
+    visibility: hidden; /* Keeps space but hides text */
+    display: inline-block;
+    height: 1em; /* Ensures the same height as a normal link */
+  }
+
+
+
+
+  /* reduce contact button section on mobile */
+
+  aside {
+    gap: 0.5rem !important; /* ✅ Reduce space between elements */
+    padding: 1rem 1rem !important; /* ✅ Adjust overall spacing */
+  }
+
+  aside h2 {
+    display: none !important;
+  }
+
+  aside a {
+    font-size: 0.75rem !important;
+    padding: 0.4rem 0.6rem !important;
+    transform: scale(0.9) !important;
   }
 }

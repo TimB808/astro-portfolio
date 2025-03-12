@@ -5,7 +5,7 @@ import Icon from './Icon.astro';
 
 <aside>
 	<h2>Want to get in touch?</h2>
-	<CallToAction href="timothy.beyer@outlook.com">
+	<CallToAction href="mailto:timothy.beyer@outlook.com">
 		Send Me a Message
 		<Icon icon="paper-plane-tilt" size="1.2em" />
 	</CallToAction>
@@ -57,30 +57,7 @@ import Icon from './Icon.astro';
 			font-size: var(--text-3xl);
 			text-align: left;
 		}
-	}
-  @media (max-width: 768px) {
-    aside {
-      padding: 1.5rem 1rem !important; /* Reduce padding further */
-      gap: 1rem !important; /* Reduce space between elements */
-      text-align: center !important; /* Keep everything centered */
-      border-radius: 0.8rem !important; /* Slightly smaller rounding */
-    }
+}
 
-    /* ✅ (a) Remove or Reduce Heading */
-    aside h2 {
-      /* OR reduce size/margins instead of removing */
-      font-size: var(--text-md) !important; /* Smaller text */
-      margin-bottom: 0.5rem !important; /* Reduce spacing below */
-    }
-
-    /* ✅ (b) Reduce Button Size to 70% */
-    aside a {
-      font-size: 0.85rem !important; /* Reduce text size */
-      padding: 0.5rem 0.8rem !important; /* Shrink button padding */
-      transform: scale(0.7); /* Shrink button to 70% of its normal size */
-    }
-  }
-
-  }
 
 </style>

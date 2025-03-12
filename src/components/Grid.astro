@@ -62,4 +62,18 @@ const { variant } = Astro.props;
 			flex-basis: 20rem;
 		}
 	}
+  @media (max-width: 768px) {
+    .grid {
+      display: flex !important; /* Change to flexbox */
+      flex-direction: column !important; /* Stack items vertically */
+      align-items: center !important; /* Center-align each project */
+      gap: 1rem !important; /* Reduce gap for compact layout */
+    }
+
+    .mention-card {
+      width: 100% !important; /* Ensure each card spans full width */
+      max-width: 22rem !important; /* Limit width for readability */
+    }
+  }
+
 </style>
